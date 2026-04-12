@@ -1,0 +1,144 @@
+/* ═══════════════════════════════════════════════════════════════
+   network3d.css — 3D Scene overlay and controls
+═══════════════════════════════════════════════════════════════ */
+
+#scene-container {
+  position: relative;
+  width: 100%; height: 100%;
+  min-height: 420px;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: transparent; /* Reveal background.js underneath */
+  border: 1px solid var(--col-border);
+}
+
+#scene-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ── HUD overlay ───────────────────────────────────────────── */
+.scene-hud {
+  position: absolute; top: 0; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: var(--gap-md);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.hud-panel {
+  background: rgba(5,10,20,0.85);
+  border: 1px solid var(--col-border);
+  border-radius: var(--r-md);
+  padding: 12px 16px;
+  backdrop-filter: blur(14px);
+  pointer-events: auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.hud-title {
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--neon-cyan); margin-bottom: 6px;
+}
+
+/* ── Legend ────────────────────────────────────────────────── */
+.legend-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--text-primary);
+  margin: 6px 0;
+  font-weight: 600;
+}
+.legend-dot {
+  width: 12px; height: 12px; border-radius: 4px;
+  flex-shrink: 0;
+}
+.legend-dot.embb  { background: var(--embb-col);  box-shadow: 0 0 6px var(--embb-col);  }
+.legend-dot.urllc { background: var(--urllc-col); box-shadow: 0 0 6px var(--urllc-col); }
+.legend-dot.mmtc  { background: var(--mmtc-col);  box-shadow: 0 0 6px var(--mmtc-col);  }
+.legend-dot.bs    { background: var(--neon-amber); box-shadow: 0 0 6px var(--neon-amber); }
+
+/* ── Beam PRB counter ──────────────────────────────────────── */
+.prb-display {
+  display: grid; gap: 4px;
+}
+.prb-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11.5px; font-family: var(--font-mono);
+  margin-bottom: 2px;
+}
+.prb-label { color: var(--text-muted); width: 55px; font-weight: 500;}
+.prb-val   { color: var(--neon-cyan); font-weight: 800; min-width: 25px;}
+.prb-bar {
+  flex: 1; height: 3px; background: rgba(255,255,255,0.05);
+  border-radius: 2px; overflow: hidden;
+}
+.prb-fill {
+  height: 100%; border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* ── Scene controls ────────────────────────────────────────── */
+.scene-controls {
+  position: absolute; bottom: var(--gap-md); right: var(--gap-md);
+  display: flex; flex-direction: column; gap: var(--gap-sm);
+  z-index: 10;
+}
+.scene-btn {
+  width: 32px; height: 32px;
+  background: rgba(5,10,20,0.8);
+  border: 1px solid var(--col-border);
+  border-radius: var(--r-sm);
+  color: var(--text-secondary);
+  font-size: 14px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+.scene-btn:hover {
+  background: rgba(0,212,255,0.1);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+}
+
+/* ── Live metrics strip ────────────────────────────────────── */
+.scene-metrics-strip {
+  position: absolute; bottom: var(--gap-md); left: var(--gap-md);
+  right: 60px;
+  background: rgba(5,10,20,0.75);
+  border: 1px solid var(--col-border);
+  border-radius: var(--r-sm);
+  padding: 6px 12px;
+  display: flex; gap: var(--gap-lg); align-items: center;
+  backdrop-filter: blur(8px);
+  z-index: 10;
+  pointer-events: none;
+}
+.strip-kpi { display: flex; flex-direction: column; align-items: center; }
+.strip-kpi-val {
+  font-size: 13px; font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--neon-cyan);
+}
+.strip-kpi-lbl {
+  font-size: 9px; text-transform: uppercase;
+  letter-spacing: 0.8px; color: var(--text-muted);
+}
+
+/* ── Floating Tower Labels ────────────────────────────────── */
+.tower-label {
+  color: var(--neon-amber);
+  background: rgba(5,10,20,0.8);
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--neon-amber-dim);
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px var(--neon-amber);
+  white-space: nowrap;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+}

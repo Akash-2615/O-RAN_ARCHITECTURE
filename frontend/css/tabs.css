@@ -1,0 +1,150 @@
+/* ═══════════════════════════════════════════════════════════════
+   tabs.css — Multi-tab Navigation
+═══════════════════════════════════════════════════════════════ */
+
+.nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px var(--gap-lg);
+  background: rgba(5, 10, 20, 0.3); /* Much more transparent */
+  border-bottom: 1px solid var(--col-border);
+  backdrop-filter: blur(12px);
+  flex-shrink: 0;
+  overflow-x: auto;
+  z-index: 50;
+}
+
+.nav-tab {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 20px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-size: 14px; font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  position: relative;
+  user-select: none;
+}
+
+.nav-tab .tab-icon {
+  font-size: 16px;
+}
+
+.nav-tab:hover {
+  color: var(--text-primary);
+  background: rgba(0, 180, 255, 0.05);
+  border-color: var(--col-border);
+}
+
+.nav-tab.active {
+  --col-bg:        transparent; /* Background is now the canvas */
+  --col-surface:   rgba(10, 22, 40, 0.15);
+  --col-card:      rgba(13, 22, 44, 0.15); /* Maximum Ghost-Glass */
+  color: var(--neon-cyan);
+  background: rgba(0, 212, 255, 0.08);
+  border-color: rgba(0, 212, 255, 0.25);
+}
+
+.nav-tab.active::after {
+  content: '';
+  position: absolute; bottom: -7px; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+}
+
+.nav-tab .tab-badge {
+  font-size: 10px; font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  background: rgba(0, 212, 255, 0.15);
+  color: var(--neon-cyan);
+}
+
+/* ── Tab Content Pages ─────────────────────────────────────── */
+.tab-content {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.tab-page {
+  position: absolute; inset: 0;
+  display: none;
+  padding: var(--gap-md);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: transparent;
+}
+
+.tab-page.active {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+}
+
+/* ── Panels ────────────────────────────────────────────────── */
+.panel-row {
+  display: flex;
+  gap: var(--gap-md);
+  flex-shrink: 0;
+}
+.panel-row .card { flex: 1; min-width: 0; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-md); }
+.grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--gap-md); }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--gap-md); }
+
+/* ── Canvas containers ─────────────────────────────────────── */
+.canvas-wrap {
+  width: 100%; height: 100%;
+  position: relative;
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+
+canvas.chart {
+  width: 100% !important;
+  max-height: 160px;
+}
+
+/* ── Agent selector ────────────────────────────────────────── */
+.agent-selector {
+  display: flex; gap: var(--gap-sm);
+  margin-bottom: var(--gap-sm);
+}
+.agent-btn {
+  padding: 5px 14px;
+  border-radius: var(--r-sm);
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--col-border);
+  color: var(--text-secondary);
+  transition: all 0.2s;
+}
+.agent-btn.active {
+  background: rgba(0,212,255,0.1);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+}
+.agent-btn:hover { border-color: var(--col-border-hi); }
+
+/* ── Log stream ────────────────────────────────────────────── */
+.log-stream {
+  font-family: var(--font-mono);
+  font-size: 13px; line-height: 1.6;
+  overflow-y: auto;
+  max-height: 100%;
+  padding: var(--gap-sm);
+}
+.log-entry { padding: 2px 0; }
+.log-ts  { color: var(--text-muted); }
+.log-lvl-INFO  { color: var(--neon-cyan); }
+.log-lvl-DEBUG { color: var(--text-muted); }
+.log-lvl-WARN  { color: var(--neon-amber); }
+.log-lvl-ERROR { color: var(--neon-red); }
+.log-source { color: var(--neon-purple); }
+.log-msg { color: var(--text-secondary); }

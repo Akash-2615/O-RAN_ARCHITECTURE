@@ -1,0 +1,267 @@
+/* ═══════════════════════════════════════════════════════════════
+   metrics.css — Dashboard panels and chart styling
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Slice row ─────────────────────────────────────────────── */
+.slice-row {
+  display: grid;
+  grid-template-columns: 80px 180px 1fr 80px 80px 60px;
+  align-items: center;
+  gap: var(--gap-sm);
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  font-size: 13px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+.slice-row:hover {
+  background: rgba(0,180,255,0.04);
+  border-color: var(--col-border);
+}
+.slice-row + .slice-row { margin-top: 4px; }
+
+.slice-badge {
+  padding: 4px 10px; border-radius: 12px;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+.slice-badge.eMBB  {
+  background: rgba(0,136,255,0.15); color: var(--embb-col);
+  border: 1px solid rgba(0,136,255,0.3);
+}
+.slice-badge.URLLC {
+  background: rgba(255,68,102,0.15); color: var(--urllc-col);
+  border: 1px solid rgba(255,68,102,0.3);
+}
+.slice-badge.mMTC  {
+  background: rgba(0,255,136,0.1); color: var(--mmtc-col);
+  border: 1px solid rgba(0,255,136,0.25);
+}
+
+.slice-prb-bar {
+  height: 6px; border-radius: 3px;
+  background: rgba(255,255,255,0.05);
+  overflow: hidden;
+}
+.slice-prb-fill {
+  height: 100%; border-radius: 3px;
+  transition: width 0.4s ease;
+}
+.slicefill-embb  { background: linear-gradient(90deg, #0055cc, #0088ff); }
+.slicefill-urllc { background: linear-gradient(90deg, #cc0022, #ff4466); }
+.slicefill-mmtc  { background: linear-gradient(90deg, #007744, #00ff88); }
+
+/* ── Gauge circles ─────────────────────────────────────────── */
+.gauge-ring {
+  position: relative; display: inline-flex;
+  align-items: center; justify-content: center;
+}
+.gauge-ring svg { transform: rotate(-90deg); }
+.gauge-bg { fill: none; stroke: rgba(255,255,255,0.05); }
+.gauge-fg { fill: none; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
+.gauge-label {
+  position: absolute; text-align: center;
+}
+.gauge-val {
+  font-size: 16px; font-weight: 800;
+  font-family: var(--font-mono);
+  display: block; line-height: 1;
+}
+.gauge-unit {
+  font-size: 9px; color: var(--text-muted);
+  display: block; margin-top: 1px;
+}
+
+/* ── Reward chart ──────────────────────────────────────────── */
+.reward-chart-wrap {
+  width: 100%;
+  height: 140px;
+  position: relative;
+}
+.reward-chart-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ── Line chart container ──────────────────────────────────── */
+.line-chart-wrap {
+  width: 100%;
+  height: 120px;
+}
+
+/* ── Heatmap ────────────────────────────────────────────────── */
+.heatmap-container {
+  width: 100%;
+  overflow-x: auto;
+}
+.heatmap-container canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* ── Agent cards ────────────────────────────────────────────── */
+.agent-cards {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: var(--gap-md);
+}
+.agent-card {
+  background: rgba(5,10,25,0.7);
+  border: 1px solid var(--col-border);
+  border-radius: var(--r-md);
+  padding: var(--gap-md);
+  transition: all 0.3s;
+}
+.agent-card:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: var(--glow-cyan);
+  transform: translateY(-2px);
+}
+.agent-card-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: var(--gap-sm);
+}
+.agent-id {
+  font-size: 18px; font-weight: 800;
+  color: var(--neon-cyan); letter-spacing: 0.5px;
+}
+.agent-live-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--neon-green);
+  animation: pulse 1.5s infinite;
+}
+.agent-stat {
+  display: flex; justify-content: space-between;
+  font-size: 14px; margin: 8px 0;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.agent-stat-k { color: var(--text-muted); font-weight: 500; }
+.agent-stat-v { color: var(--text-primary); font-family: var(--font-mono); font-weight: 700; }
+
+/* ── Network KPI Summary Bar ────────────────────────────────── */
+.network-kpi-summary {
+    display: flex; gap: 10px; margin-bottom: 12px;
+    background: rgba(0,180,255,0.04);
+    border: 1px solid rgba(0,180,255,0.12);
+    border-radius: 10px; padding: 12px 16px;
+}
+.nkpi-pill {
+    flex: 1; text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.05);
+    padding-right: 10px;
+}
+.nkpi-pill:last-child { border-right: none; }
+.nkpi-val {
+    font-family: var(--font-mono); font-size: 18px;
+    font-weight: 800; letter-spacing: 0.5px;
+}
+.nkpi-label {
+    font-size: 9px; text-transform: uppercase;
+    color: var(--text-muted); letter-spacing: 0.8px;
+    margin-top: 4px;
+}
+
+/* ── Comparison Table ────────────────────────────────────────── */
+.comp-table {
+    width: 100%; border-collapse: separate; border-spacing: 0 8px; margin-top: 10px;
+}
+.comp-table th {
+    text-align: left; font-size: 11px; color: var(--text-muted);
+    text-transform: uppercase; padding: 12px 15px; letter-spacing: 1px;
+}
+.comp-table td {
+    padding: 16px 15px; font-size: 15px; 
+    background: rgba(255,255,255,0.02);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.comp-table td:first-child { border-left: 1px solid rgba(255,255,255,0.05); border-radius: 8px 0 0 8px; }
+.comp-table td:last-child { border-right: 1px solid rgba(255,255,255,0.05); border-radius: 0 8px 8px 0; }
+
+.comp-row:hover td { background: rgba(0,180,255,0.05); border-color: rgba(0,180,255,0.2); }
+
+/* Leader highlight */
+.comp-row.comp-leader td {
+    background: rgba(0,255,136,0.08); /* Stronger background for leader */
+    border-top: 1px solid rgba(0,255,136,0.3);
+    border-bottom: 1px solid rgba(0,255,136,0.3);
+    box-shadow: 0 0 20px rgba(0,255,136,0.1); /* External glow */
+}
+.comp-row.comp-leader .comp-delta-up {
+    text-shadow: 0 0 10px rgba(0,255,136,0.5);
+}
+
+.comp-agent-name { font-weight: 800; color: var(--text-primary); font-size: 16px; }
+.comp-rwd-val { font-family: var(--font-mono); font-weight: 600; font-size: 17px; }
+.comp-delta-up { color: var(--neon-green); font-weight: 800; display: flex; align-items: center; gap: 4px; font-size: 18px; }
+.comp-delta-down { color: var(--neon-red); font-weight: 800; display: flex; align-items: center; gap: 4px; font-size: 18px; }
+.comp-delta-up::before { content: '↑'; font-size: 18px; }
+.comp-delta-down::before { content: '↓'; font-size: 18px; }
+
+.comp-status-pill {
+    padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    background: rgba(255,255,255,0.05); color: var(--text-muted);
+}
+.status-training { color: var(--neon-cyan); border: 1px solid rgba(0,180,255,0.3); background: rgba(0,180,255,0.1); }
+.status-optimized { color: var(--neon-green); border: 1px solid rgba(0,255,136,0.3); background: rgba(0,255,136,0.1); }
+
+#chart-radar {
+    width: 100%; height: 100%; display: block;
+    max-width: 320px; max-height: 320px;
+}
+
+/* ── Fed node graph ─────────────────────────────────────────── */
+#fed-graph-canvas {
+  width: 100%; height: 280px; display: block;
+}
+
+/* ── SHAP bars ──────────────────────────────────────────────── */
+.shap-bar-row {
+  display: flex; align-items: center; gap: var(--gap-sm);
+  margin: 5px 0;
+  font-size: 12px;
+}
+.shap-feat-name {
+  width: 250px; color: var(--text-secondary);
+  font-family: var(--font-body); flex-shrink: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.shap-bar-bg {
+  flex: 1; height: 12px; border-radius: 6px;
+  background: rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+.shap-bar-fill {
+  height: 100%; border-radius: 6px;
+  background: linear-gradient(90deg, var(--neon-purple), var(--neon-cyan));
+  transition: width 0.5s ease;
+}
+.shap-val {
+  width: 55px; text-align: right;
+  font-family: var(--font-mono); color: var(--neon-cyan);
+  flex-shrink: 0; font-weight: 700;
+}
+
+/* ── xApp topology ──────────────────────────────────────────── */
+#xapp-topology-canvas {
+  width: 100%; height: 360px;
+  display: block;
+}
+
+/* ── Throughput bars ─────────────────────────────────────────── */
+.th-bar-row {
+  margin: 5px 0;
+}
+.th-bar-header {
+  display: flex; justify-content: space-between;
+  font-size: 12px; margin-bottom: 3px;
+}
+.th-bar-label { color: var(--text-secondary); }
+.th-bar-val   { font-family: var(--font-mono); color: var(--neon-cyan); }
+.th-bar { height: 8px; border-radius: 4px; background: rgba(255,255,255,0.05); overflow: hidden; }
+.th-fill {
+  height: 100%; border-radius: 4px;
+  transition: width 0.4s ease;
+  background: linear-gradient(90deg, #004488, #0088ff);
+}

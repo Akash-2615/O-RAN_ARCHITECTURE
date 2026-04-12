@@ -1,0 +1,287 @@
+/* ═══════════════════════════════════════════════════════════════
+   main.css — Global Design System
+   5G DRL O-RAN Network Slicing Simulator
+   Dark glassmorphism · Neon accents · Premium UI
+═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── CSS Variables ─────────────────────────────────────────── */
+:root {
+  /* Brand colours */
+  --col-bg:        transparent;
+  --col-surface:   transparent;
+  --col-card:      rgba(13, 22, 44, 0.03); /* Absolute Ghost */
+  --col-border:    rgba(0, 180, 255, 0.15);
+  --col-border-hi: rgba(0, 220, 255, 0.4);
+
+  /* Neon palette */
+  --neon-cyan:     #00d4ff;
+  --neon-blue:     #0088ff;
+  --neon-purple:   #8b5cf6;
+  --neon-green:    #00ff88;
+  --neon-amber:    #ffb300;
+  --neon-red:      #ff4466;
+  --neon-pink:     #ff00aa;
+
+  /* Slice colours */
+  --embb-col:  #0088ff;
+  --urllc-col: #ff4466;
+  --mmtc-col:  #00ff88;
+
+  /* Text */
+  --text-primary:   #ffffff;
+  --text-secondary: rgba(230, 240, 255, 0.85);
+  --text-muted:     rgba(180, 210, 255, 0.65);
+
+  /* Typography */
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --gap-xs: 4px;  --gap-sm: 8px;
+  --gap-md: 16px; --gap-lg: 24px;
+  --gap-xl: 32px;
+
+  /* Radius */
+  --r-sm: 6px;  --r-md: 12px;  --r-lg: 18px;  --r-xl: 24px;
+
+  /* Glow */
+  --glow-cyan:   0 0 20px rgba(0, 212, 255, 0.4);
+  --glow-blue:   0 0 20px rgba(0, 136, 255, 0.4);
+  --glow-green:  0 0 20px rgba(0, 255, 136, 0.35);
+  --glow-red:    0 0 20px rgba(255, 68, 102, 0.4);
+  --glow-purple: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  font-family: var(--font-body);
+  background: rgba(5, 10, 20, 0.6); /* Translucent base */
+  color: var(--text-primary);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  font-size: 17px;
+}
+
+/* ── Dynamic Background Canvas ────────────────────────────── */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: auto; /* allow click bursts */
+  display: block;
+}
+
+/* ── App Shell ─────────────────────────────────────────────── */
+#app {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column;
+  height: 100vh;
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px var(--gap-lg);
+  background: rgba(5, 10, 20, 0.1);
+  border-bottom: 1px solid var(--col-border);
+  backdrop-filter: blur(14px);
+  flex-shrink: 0;
+  z-index: 100;
+}
+
+.header-brand {
+  display: flex; align-items: center; gap: var(--gap-md);
+}
+
+.header-logo {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  box-shadow: var(--glow-cyan);
+}
+
+.header-title {
+  font-size: 17px; font-weight: 700; letter-spacing: 0.5px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-subtitle {
+  font-size: 13px; color: var(--text-muted); font-weight: 400;
+}
+
+.header-status {
+  display: flex; align-items: center; gap: var(--gap-lg);
+}
+
+.status-pill {
+  display: flex; align-items: center; gap: var(--gap-xs);
+  padding: 5px 14px;
+  background: rgba(0,255,136,0.08);
+  border: 1px solid rgba(0,255,136,0.2);
+  border-radius: 20px;
+  font-size: 13px; font-weight: 600; color: var(--neon-green);
+}
+
+.status-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--neon-green);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.3); }
+}
+
+.header-kpi-bar {
+  display: flex; gap: var(--gap-md);
+}
+
+.hkpi {
+  text-align: center;
+}
+.hkpi-val {
+  font-size: 24px; font-weight: 700; color: var(--neon-cyan);
+  font-family: var(--font-mono);
+}
+.hkpi-label {
+  font-size: 13px; color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.tti-counter {
+  font-family: var(--font-mono);
+  font-size: 14px; color: var(--text-muted);
+}
+
+/* ── Cards ─────────────────────────────────────────────────── */
+.card {
+  background: var(--col-card);
+  border: 1px solid var(--col-border);
+  border-radius: var(--r-md);
+  backdrop-filter: blur(14px); /* Stronger blur for glass beauty */
+  padding: var(--gap-md);
+  transition: border-color 0.3s;
+}
+.card:hover {
+  border-color: var(--col-border-hi);
+}
+
+.card-title {
+  font-size: 15px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--text-secondary);
+  margin-bottom: var(--gap-sm);
+  display: flex; align-items: center; gap: var(--gap-xs);
+}
+
+/* ── KPI Cards ─────────────────────────────────────────────── */
+.kpi-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-md);
+}
+
+.kpi-card {
+  background: var(--col-card);
+  border: 1px solid var(--col-border);
+  border-radius: var(--r-md);
+  backdrop-filter: blur(14px);
+  padding: var(--gap-md);
+  text-align: center;
+  position: relative; overflow: hidden;
+  transition: all 0.3s;
+}
+.kpi-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: var(--accent, var(--neon-cyan));
+  opacity: 0.8;
+}
+.kpi-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--col-border-hi);
+  box-shadow: var(--glow-cyan);
+}
+
+.kpi-value {
+  font-size: 38px; font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--accent, var(--neon-cyan));
+  line-height: 1;
+  margin: var(--gap-xs) 0;
+  text-shadow: var(--glow-cyan);
+  transition: all 0.3s;
+}
+.kpi-label {
+  font-size: 14px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--text-muted);
+}
+.kpi-delta {
+  font-size: 13px; font-family: var(--font-mono);
+  margin-top: 4px;
+}
+.kpi-delta.up   { color: var(--neon-green); }
+.kpi-delta.down { color: var(--neon-red);   }
+
+/* ── Progress Bars ─────────────────────────────────────────── */
+.progress-bar {
+  height: 4px; border-radius: 2px;
+  background: rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-blue));
+  transition: width 0.5s ease;
+  box-shadow: var(--glow-cyan);
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,180,255,0.3); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,180,255,0.6); }
+
+/* ── Utility ────────────────────────────────────────────────── */
+.mono { font-family: var(--font-mono); }
+.text-cyan   { color: var(--neon-cyan);   }
+.text-green  { color: var(--neon-green);  }
+.text-red    { color: var(--neon-red);    }
+.text-amber  { color: var(--neon-amber);  }
+.text-purple { color: var(--neon-purple); }
+.text-muted  { color: var(--text-muted);  }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.gap-sm { gap: var(--gap-sm); }
+.gap-md { gap: var(--gap-md); }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.overflow-hidden { overflow: hidden; }
+.overflow-y-auto { overflow-y: auto; }
+
+/* Number change flash animation */
+@keyframes numFlash {
+  0%   { color: var(--neon-amber); text-shadow: 0 0 12px rgba(255,179,0,0.8); }
+  100% { color: inherit; text-shadow: inherit; }
+}
+.flash { animation: numFlash 0.4s ease-out; }
+
+/* Scan line effect */
+@keyframes scanLine {
+  0%   { top: -2px; }
+  100% { top: 100%; }
+}
