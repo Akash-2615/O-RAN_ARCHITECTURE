@@ -5,8 +5,8 @@
 
 // Connect to the backend dynamically, supporting Live Server on 5500 routing to 8000
 const _host    = window.location.port === '5500' ? '127.0.0.1:8000' : '127.0.0.1:8000';
-const WS_URL   = `ws://${_host}/ws`;
-const API_BASE = `http://${_host}`;
+const API_BASE = "https://o-ran-architecture-v3la.onrender.com";
+const WS_URL = "wss://o-ran-architecture-v3la.onrender.com/ws";
 
 // ── Global state ────────────────────────────────────────────────────── //
 window.SIM = {
